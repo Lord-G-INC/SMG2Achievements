@@ -27,6 +27,10 @@
   "ModuleDependancies": [
     "PTUtils"
   ],
+  "InstallDependencies": [
+    "PTUtils",
+    "Syati_Init"
+  ],
   "BuildTasks": [{
     "Task": "Copy",
     "From": "disc/",

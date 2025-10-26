@@ -58,6 +58,10 @@ namespace sf
         }
     }
 
+    /**
+     * UTILITY FUNCTIONS
+     */
+
     const char *getParam00Str(JMapInfoIter iter)
     {
         const char *pParam00Str;
@@ -83,9 +87,27 @@ namespace sf
         return pValue;
     }
 
+    // No, I don't think I will.
+    s32 getLife()
+    {
+        // Note: This crashes on file select.
+        MarioHolder *pHolder = MR::getMarioHolder();
+        return pHolder->getMarioActor()->mLifeNum;
+    }
+
+    GalaxyStatusAccessor getGalaxyStatusAccessor(JMapInfoIter iter)
+    {
+        const char *pGalaxyName = getGalaxyName(iter);
+        return MR::makeGalaxyStatusAccessor(pGalaxyName);
+    }
+
+    /**
+     * TYPE FUNCTIONS
+     * Checks specific flag types to see if they return true or false.
+     */
+
     bool handleTypeAnd(JMapInfoIter iter)
     {
-        bool isCorrect = true;
         for (int i = 0; i < 100; i++)
         {
             const char *pValue = getParamStrNumbered(iter, i);
@@ -94,12 +116,11 @@ namespace sf
             else if (!isFlagActive(pValue))
                 return false;
         }
-        return isCorrect;
+        return true;
     }
 
     bool handleTypeOr(JMapInfoIter iter)
     {
-        bool isCorrect = true;
         for (int i = 0; i < 100; i++)
         {
             const char *pValue = getParamStrNumbered(iter, i);
@@ -119,12 +140,19 @@ namespace sf
 
     bool handleTypeGalaxyName(JMapInfoIter iter)
     {
-        const char *pGalaxyName = getParam00Str(iter);
-        return MR::isEqualStageName(pGalaxyName);
+        for (int i = 0; i < 100; i++)
+        {
+            const char *pValue = getParamStrNumbered(iter, i);
+            if (MR::isNullOrEmptyString(pValue))
+                break;
+            else if (MR::isEqualStageName(pValue))
+                return true;
+        }
+        return false;
     }
 
     /**
-     * GROUP TYPE - COMPARISON
+     * Comparison type utility functions
      */
 
     Comparator getComparatorType(const char *pString)
@@ -245,13 +273,6 @@ namespace sf
         return handleTypeGroupComparisonS32(iter, GameDataFunction::getPlayerLeft());
     }
 
-    s32 getLife()
-    {
-        // Note: This crashes on file select.
-        MarioHolder *pHolder = MR::getMarioHolder();
-        return pHolder->getMarioActor()->mLifeNum;
-    }
-
     bool handleTypeLifeNum(JMapInfoIter iter)
     {
         return handleTypeGroupComparisonS32(iter, getLife());
@@ -262,12 +283,6 @@ namespace sf
         s32 param01int = 0;
         iter.getValue<s32>("Param01Int", &param01int);
         return handleTypeGroupComparisonS32(iter, MR::getRaceBestTime(param01int));
-    }
-
-    GalaxyStatusAccessor getGalaxyStatusAccessor(JMapInfoIter iter)
-    {
-        const char *pGalaxyName = getGalaxyName(iter);
-        return MR::makeGalaxyStatusAccessor(pGalaxyName);
     }
 
     bool handleTypeBronzeStarCollected(JMapInfoIter iter)
@@ -321,5 +336,4 @@ namespace sf
         return MR::isGalaxyCompletedWithGreen(pGalaxyName);
     }
 
-    
 }

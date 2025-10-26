@@ -57,7 +57,11 @@ This goes on up to Param99Str, but likewise with And, you'll have to add those f
 Checks if the flag in Param00Str is true. If it is, it returns false. If it isn't, it returns true.
 
 #### GalaxyName
-Checks what the current galaxy's name is. If it's the same name that's in `Param00Str`, it returns true. Otherwise, it returns false.
+Checks if any of the galaxy names provided are the current galaxy.
+
+Checks Param00Str. If that's the current galaxy's name, returns true. If false, it goes on to Param01Str. If that's blank, it assumes the previous flag was the last one and returns false.
+
+Like `Or`, goes on up to Param99Str (but you will have to add these fields).
 
 #### ScenarioNo / ScenarioNum
 [Comparison Type](#comparison-type). Compares the current scenario number.
