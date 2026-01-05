@@ -1,8 +1,8 @@
 {
-  "Name": "SuperFlag",
-  "Author": "AwesomeTMC, Evanbowl",
+  "Name": "SMG2Achievements",
+  "Author": "AwesomeTMC, Evanbowl, Lord-G",
   "Description": "An API to allow other modules to check if conditions specified here are True or False.",
-  "APIId": "SuperFlag",
+  "APIId": "SMG2Achievementsg",
   "ModuleExtensionDefinition": [
     {
       "Name": "SuperFlagCustomFlags",
