@@ -25,15 +25,38 @@
     }
   ],
   "ModuleDependancies": [
-    "PTUtils"
+    "PTUtils",
+    "Syati_ExtGameData_API",
+    "Syati_Common_Functions"
   ],
   "InstallDependencies": [
     "PTUtils",
-    "Syati_Init"
+    "Syati_Init",
+    "Syati_ExtGameData_API",
+    "Syati_Common_Functions"
   ],
   "BuildTasks": [{
     "Task": "Copy",
     "From": "disc/",
     "To": "../../Output/disc/"
-  }]
+  }],
+  "ModuleData": [
+    {
+      "NewSaveChunk": [
+        {
+          "ChunkMemberType": "AchievementChunk",
+          "ChunkMemberName": "mAchievementChunk",
+          "ChunkCreationFunc": "createBinaryChunk<AchievementChunk>",
+          "Include": "Achievements.h"
+        }
+      ],
+      "OnGameSceneStart": [
+        {
+          "Name": "onSceneStart",
+          "Function": "onSceneStart",
+          "Include": "Hooks.h"
+        }
+      ]
+    }
+  ]
 }
