@@ -57,7 +57,7 @@ void onSceneStart() {
     }
 }
 
-const char* loopNames[] {
+const char* loopNames[] = {
     "StarPieceNum",
     "StarBitNum",
     "CoinNum",
