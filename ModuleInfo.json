@@ -56,6 +56,13 @@
           "Function": "onSceneStart",
           "Include": "Hooks.h"
         }
+      ],
+      "OnGameSystemFrameLoop": [
+        {
+          "Name": "onSceneLoop",
+          "Function": "onSceneLoop",
+          "Include": "Hooks.h"
+        }
       ]
     }
   ]
